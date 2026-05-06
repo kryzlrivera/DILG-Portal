@@ -7,44 +7,72 @@ const personnel = [
     name: 'Annabelle F. Yangson',
     role: 'DILG City Director',
     status: 'Active',
-    group: 'Managerial',
     employment: 'Fulltime',
     email: 'bagusfikri@gmail.com',
-    phone: '+62 123 123 123',
-    joined: '29 Oct, 2020',
   },
   {
     id: 'EMP02',
-    name: 'Atty. Florian faith A. Bayawac',
+    name: 'Atty. Florian faith A. Bayawac, ENP, CESE',
     role: 'Local Government Operations Officer VI',
     status: 'Active',
-    group: 'Managerial',
     employment: 'Fulltime',
     email: 'ihdizein@gmail.com',
-    phone: '(40) 768 082 716',
-    joined: '1 Feb, 2019',
   },
   {
     id: 'EMP03',
     name: 'Jill D. Peros',
     role: 'Local Government Operations Officer V',
     status: 'Active',
-    group: 'Managerial',
     employment: 'Fulltime',
     email: 'mufti.h@gmail.com',
-    phone: '(63) 130 689 256',
-    joined: '1 Feb, 2021',
   },
   {
     id: 'EMP04',
-    name: 'Fauzan Ardhiansyah',
-    role: 'UI Designer',
+    name: 'Karen S. Gabinete',
+    role: 'Local Government Operations Officer V',
     status: 'Active',
-    group: 'Managerial',
     employment: 'Fulltime',
-    email: 'heloozan@gmail.com',
-    phone: '(64) 630 613 343',
-    joined: '21 Sep, 2018',
+    email: 'mufti.h@gmail.com',
+  },
+  {
+    id: 'EMP05',
+    name: 'Jemelyn A. Yaun',
+    role: 'Administrative Aid IV',
+    status: 'Active',
+    employment: 'Contractual',
+    email: 'Jocelmones98@gmail.com',
+  },
+  {
+    id: 'EMP06',
+    name: 'Daryll Bacquial',
+    role: 'Information System Analyst',
+    status: 'Active',
+    employment: 'Contractual',
+    email: 'Jocelmones98@gmail.com',
+  },
+  {
+    id: 'EMP07',
+    name: 'Jonathan S. Bequibel',
+    role: 'Information Technology Support',
+    status: 'Active',
+    employment: 'Contractual',
+    email: 'Jocelmones98@gmail.com',
+  },
+  {
+    id: 'EMP08',
+    name: 'Jocel Mar M. Mones',
+    role: 'Information Technology Support',
+    status: 'Active',
+    employment: 'Contractual',
+    email: 'Jocelmones98@gmail.com',
+  },
+  {
+    id: 'EMP09',
+    name: 'Devon P. Jalandoni',
+    role: 'Driver',
+    status: 'Active',
+    employment: 'Contractual',
+    email: 'Jocelmones98@gmail.com',
   },
 ];
 
@@ -79,12 +107,9 @@ const About = () => {
               </div>
               <div className="personnel-meta">
                 <div><span>#</span> {person.id}</div>
-                <div>{person.group} · {person.employment}</div>
                 <div><a href={`mailto:${person.email}`}>{person.email}</a></div>
-                <div><a href={`tel:${person.phone}`}>{person.phone}</a></div>
               </div>
               <div className="personnel-footer">
-                <span>Joined at {person.joined}</span>
                 <button type="button">View details</button>
               </div>
             </article>
