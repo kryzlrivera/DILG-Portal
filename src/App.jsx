@@ -5,10 +5,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
 import Home from './pages/public/Home';
+import About from './pages/public/About';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import SuperAdminDashboard from './pages/admin/SuperAdminDashboard';
-
-// 1. ADDED THIS IMPORT
+import PersonnelManagement from './pages/admin/PersonnelManagement';
+import Login from './pages/public/Login';
+import Register from './pages/public/Register';
 import ListOfBarangay from './pages/public/ListOfBarangay';
 
 import './App.css';
@@ -40,18 +42,21 @@ function App() {
           {/* 2. UPDATED THIS LINE TO USE THE COMPONENT */}
           <Route path="list-of-barangay" element={<ListOfBarangay />} />
 
-          <Route path="about" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>About Us</h1></div>} />
+          <Route path="about" element={<About />} />
           <Route path="programs" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Programs & Projects</h1></div>} />
           <Route path="lgu" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Local Government Units</h1></div>} />
           <Route path="organizations" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Organizations</h1></div>} />
           <Route path="barangay-officials" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Barangay Officials</h1></div>} />
           <Route path="appointment" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Appointment</h1></div>} />
           <Route path="articles" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Articles</h1></div>} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
         </Route>
 
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLayout role="Admin" />}>
           <Route index element={<AdminDashboard />} />
+          <Route path="personnel" element={<PersonnelManagement />} />
         </Route>
 
         {/* Super Admin Routes */}

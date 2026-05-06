@@ -1,0 +1,184 @@
+.personnel-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.personnel-top h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--color-text-main);
+}
+
+.personnel-top p {
+  margin: 0.75rem 0 0;
+  color: var(--color-text-muted);
+  max-width: 700px;
+}
+
+.personnel-body {
+  display: grid;
+  grid-template-columns: 1.05fr 1.4fr;
+  gap: 2rem;
+}
+
+.personnel-form-card,
+.personnel-list-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.personnel-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #d1fae5;
+}
+
+.personnel-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.personnel-form label {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+}
+
+.personnel-form input,
+.personnel-form select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background-color: var(--color-background);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.secondary-button,
+.auth-button {
+  padding: 0.95rem 1.2rem;
+  border-radius: 0.75rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.secondary-button {
+  background-color: #f1f5f9;
+  color: var(--color-text-main);
+}
+
+.auth-button {
+  background-color: var(--color-crimson);
+  color: var(--color-white);
+}
+
+.personnel-grid-admin {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.personnel-admin-card {
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: 1rem;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.status-badge.active {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.card-actions button {
+  border: none;
+  background-color: #f3f4f6;
+  color: var(--color-text-main);
+  padding: 0.65rem 0.95rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+.card-actions button:hover {
+  background-color: #e5e7eb;
+}
+
+.danger-button {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.personnel-admin-card h4 {
+  margin: 0;
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--color-text-muted);
+}
+
+.personnel-details {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--color-text-main);
+}
+
+.personnel-details div {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 950px) {
+  .personnel-body {
+    grid-template-columns: 1fr;
+  }
+}

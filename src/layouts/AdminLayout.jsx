@@ -1,14 +1,18 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
+import Logo from '../components/Logo';
 
 const AdminLayout = ({ role }) => {
   return (
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f1f5f9' }}>
       {/* Sidebar */}
       <aside style={{ width: '250px', backgroundColor: 'var(--color-crimson-dark)', color: 'white', padding: '1.5rem' }}>
-        <div style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '1.25rem', color: 'var(--color-yellow)' }}>DILG Portal</h2>
-          <p style={{ fontSize: '0.875rem', opacity: 0.8 }}>{role} Dashboard</p>
+        <div style={{ marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <Logo size={48} />
+          <div>
+            <h2 style={{ fontSize: '1.25rem', color: 'var(--color-yellow)', margin: 0 }}>DILG Portal</h2>
+            <p style={{ fontSize: '0.875rem', opacity: 0.8, margin: 0 }}>{role} Dashboard</p>
+          </div>
         </div>
         <nav>
           <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -17,6 +21,13 @@ const AdminLayout = ({ role }) => {
                 Dashboard
               </Link>
             </li>
+            {role === 'Admin' && (
+              <li>
+                <Link to="/admin/personnel" style={{ color: 'white', textDecoration: 'none' }}>
+                  Personnel
+                </Link>
+              </li>
+            )}
             <li>
               <Link to="/" style={{ color: 'white', textDecoration: 'none', opacity: 0.8 }}>
                 ← Back to Portal

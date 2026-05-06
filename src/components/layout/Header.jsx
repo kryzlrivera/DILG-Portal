@@ -1,63 +1,87 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Menu, X, Search } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import Logo from '../Logo';
 import './Header.css';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isOrgDropdownOpen, setIsOrgDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentUser, setCurrentUser] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOrgDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
-  // Close menus on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
-    setIsOrgDropdownOpen(false);
+    const savedUser = localStorage.getItem('dilgCurrentUser');
+    if (savedUser) {
+      try {
+        setCurrentUser(JSON.parse(savedUser));
+      } catch (error) {
+        localStorage.removeItem('dilgCurrentUser');
+        setCurrentUser(null);
+      }
+    } else {
+      setCurrentUser(null);
+    }
   }, [location]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentDate(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Manila' };
+  const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true, timeZone: 'Asia/Manila' };
+
+  const formattedDate = new Intl.DateTimeFormat('en-PH', dateOptions).format(currentDate);
+  const formattedTime = new Intl.DateTimeFormat('en-PH', timeOptions).format(currentDate);
 
   return (
     <header className="site-header">
-      {/* Top utility bar */}
-      <div className="header-utility">
-        <div className="container utility-content">
-          <div className="utility-left">
-            <span>Gov.PH</span>
-          </div>
-          <div className="utility-right">
-            <span>Standard Time: {new Date().toLocaleDateString('en-PH')}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main branding area */}
-      <div className="header-branding">
-        <div className="container branding-content">
-          <Link to="/" className="brand-logo-link">
-            {/* Placeholder for DILG Logo */}
-            <div className="brand-icon">DILG</div>
-            <div className="brand-text">
-              <span className="brand-republic">Republic of the Philippines</span>
-              <h1 className="brand-title">Department of Interior and Local Government</h1>
+      {/* Top bar */}
+      <div className="header-top">
+        <div className="container header-top-content">
+          <div className="brand-block">
+            <div className="brand-icons">
+              <Logo size={88} className="header-logo-icon" />
+              <div className="brand-logo bagong-logo">
+                <div className="brand-logo-text">BAGONG PILIPINAS</div>
+              </div>
             </div>
-          </Link>
-          <div className="header-search">
-            <div className="search-box">
-              <input type="text" placeholder="Search..." />
-              <button aria-label="Search"><Search size={18} /></button>
+            <div className="brand-text-block">
+              <div className="brand-subtitle">Republic of the Philippines</div>
+              <div className="brand-title">Department of the Interior and Local Government</div>
             </div>
+          </div>
+          <div className="header-right">
+            <div className="date-time">
+              <div className="date-label">Philippines Time & Date</div>
+              <div className="date">{formattedDate}</div>
+              <div className="time">{formattedTime}</div>
+            </div>
+            {currentUser ? (
+              <div className="user-controls">
+                <div className="user-greeting">Hi, {currentUser.fullName || currentUser.email}</div>
+                <button
+                  className="login-btn logout-btn"
+                  onClick={() => {
+                    localStorage.removeItem('dilgCurrentUser');
+                    setCurrentUser(null);
+                    navigate('/');
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <button className="login-btn" onClick={() => navigate('/login')}>Login</button>
+            )}
           </div>
         </div>
       </div>
@@ -65,43 +89,17 @@ const Header = () => {
       {/* Navigation */}
       <nav className="header-nav">
         <div className="container nav-content">
-          {/* Mobile toggle */}
           <button className="mobile-toggle" onClick={toggleMobileMenu}>
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            <span>Menu</span>
           </button>
 
           <ul className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-            <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link></li>
+            <li><Link to="/Home" className={location.pathname === '/home' ? 'active' : ''}>Home</Link></li>
             <li><Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About Us</Link></li>
-            <li><Link to="/programs" className={location.pathname === '/programs' ? 'active' : ''}>Programs & Projects</Link></li>
-            <li><Link to="/lgu" className={location.pathname === '/lgu' ? 'active' : ''}>Local Government Units</Link></li>
-            
-            {/* Dropdown Menu for Organizations */}
-            <li className="dropdown-container" ref={dropdownRef}>
-              <button 
-                className={`dropdown-toggle ${location.pathname.includes('/organizations') || location.pathname.includes('/barangay') ? 'active' : ''}`}
-                onClick={() => setIsOrgDropdownOpen(!isOrgDropdownOpen)}
-                aria-haspopup="true"
-                aria-expanded={isOrgDropdownOpen}
-              >
-                Organizations <ChevronDown size={16} />
-              </button>
-              
-              <ul className={`dropdown-menu ${isOrgDropdownOpen ? 'show' : ''}`}>
-                <li><Link to="/organizations">List of Organizations</Link></li>
-                <li><Link to="/list-of-barangay">List of Barangay</Link></li>
-                <li><Link to="/barangay-officials">Barangay Officials</Link></li>
-              </ul>
-            </li>
-
-            <li><Link to="/appointment" className={location.pathname === '/appointment' ? 'active' : ''}>Appointment</Link></li>
-            <li><Link to="/articles" className={location.pathname === '/articles' ? 'active' : ''}>Articles</Link></li>
-            
-            {/* Login Links - right aligned on desktop */}
-            <li className="nav-end-links">
-              <Link to="/admin" className="nav-login-btn">Admin Portal</Link>
-            </li>
+            <li><Link to="/public-info" className={location.pathname === '/projects' ? 'active' : ''}>Programs & Projects</Link></li>
+            <li><Link to="/regulations" className={location.pathname === '/lgu' ? 'active' : ''}>Local Government Units</Link></li>
+            <li><Link to="/services" className={location.pathname === '/barangay' ? 'active' : ''}>Barangay</Link></li>
+            <li><Link to="/faq" className={location.pathname === '/faq' ? 'active' : ''}>FAQ</Link></li>
           </ul>
         </div>
       </nav>
