@@ -1,0 +1,72 @@
+.history-page {
+  padding: 3rem 0;
+}
+
+.history-header {
+  max-width: 780px;
+  margin-bottom: 2rem;
+}
+
+.history-header .eyebrow {
+  color: var(--color-crimson);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.history-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  color: var(--color-text-main);
+  line-height: 1.1;
+}
+
+.history-header p {
+  margin: 1rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.history-content {
+  display: grid;
+  gap: 2rem;
+}
+
+.history-content section {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.history-content h2 {
+  margin-top: 0;
+  color: var(--color-text-main);
+}
+
+.history-content p,
+.history-content li {
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.history-content ul {
+  margin: 1rem 0 0;
+  padding-left: 1.3rem;
+}
+
+.history-content li {
+  margin-bottom: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .history-page {
+    padding: 2rem 0;
+  }
+
+  .history-content {
+    gap: 1.5rem;
+  }
+}

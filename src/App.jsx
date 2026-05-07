@@ -4,11 +4,16 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PublicLayout from './layouts/PublicLayout';
 import AdminLayout from './layouts/AdminLayout';
+import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/public/Home';
 import About from './pages/public/About';
+import History from './pages/public/History';
+import ArticleList from './pages/public/ArticleList';
+import ArticleDetail from './pages/public/ArticleDetail';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import SuperAdminDashboard from './pages/admin/SuperAdminDashboard';
 import PersonnelManagement from './pages/admin/PersonnelManagement';
+import AdminArticles from './pages/admin/AdminArticles';
 import Login from './pages/public/Login';
 import Register from './pages/public/Register';
 import ListOfBarangay from './pages/public/ListOfBarangay';
@@ -48,20 +53,26 @@ function App() {
           <Route path="organizations" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Organizations</h1></div>} />
           <Route path="barangay-officials" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Barangay Officials</h1></div>} />
           <Route path="appointment" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Appointment</h1></div>} />
-          <Route path="articles" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Articles</h1></div>} />
+          <Route path="history" element={<History />} />
+          <Route path="articles" element={<ArticleList />} />
+          <Route path="articles/:articleId" element={<ArticleDetail />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
 
         {/* Admin Routes */}
-        <Route path="/admin" element={<AdminLayout role="Admin" />}>
+        <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin']}><AdminLayout role="Admin" /></ProtectedRoute>}>
           <Route index element={<AdminDashboard />} />
           <Route path="personnel" element={<PersonnelManagement />} />
+          <Route path="articles" element={<AdminArticles />} />
+          <Route path="documents" element={<AdminDashboard />} />
         </Route>
 
         {/* Super Admin Routes */}
-        <Route path="/super-admin" element={<AdminLayout role="Super Admin" />}>
+        <Route path="/super-admin" element={<ProtectedRoute allowedRoles={['super-admin']}><AdminLayout role="Super Admin" /></ProtectedRoute>}>
           <Route index element={<SuperAdminDashboard />} />
+          <Route path="articles" element={<AdminArticles />} />
+          <Route path="documents" element={<AdminDashboard />} />
         </Route>
       </Routes>
     </Router>

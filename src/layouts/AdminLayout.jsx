@@ -21,6 +21,16 @@ const AdminLayout = ({ role }) => {
                 Dashboard
               </Link>
             </li>
+            <li>
+              <Link to={role === 'Admin' ? '/admin/articles' : '/super-admin/articles'} style={{ color: 'white', textDecoration: 'none' }}>
+                Articles
+              </Link>
+            </li>
+            <li>
+              <Link to={role === 'Admin' ? '/admin/documents' : '/super-admin/documents'} style={{ color: 'white', textDecoration: 'none' }}>
+                Documents
+              </Link>
+            </li>
             {role === 'Admin' && (
               <li>
                 <Link to="/admin/personnel" style={{ color: 'white', textDecoration: 'none' }}>
