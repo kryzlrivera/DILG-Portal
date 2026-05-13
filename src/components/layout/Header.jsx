@@ -94,11 +94,15 @@ const Header = () => {
           </button>
 
           <ul className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-            <li><Link to="/Home" className={location.pathname === '/home' ? 'active' : ''}>Home</Link></li>
+            <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link></li>
             <li><Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About Us</Link></li>
-            <li><Link to="/public-info" className={location.pathname === '/projects' ? 'active' : ''}>Programs & Projects</Link></li>
-            <li><Link to="/regulations" className={location.pathname === '/lgu' ? 'active' : ''}>Local Government Units</Link></li>
-            <li><Link to="/services" className={location.pathname === '/barangay' ? 'active' : ''}>Barangay</Link></li>
+            <li><Link to="/programs" className={location.pathname === '/programs' ? 'active' : ''}>Programs & Projects</Link></li>
+            <li><Link to="/lgu" className={location.pathname === '/lgu' ? 'active' : ''}>Local Government Units</Link></li>
+            <li><Link to="/list-of-barangay" className={location.pathname === '/list-of-barangay' ? 'active' : ''}>Barangay</Link></li>
+            <li><Link to="/appointment" className={location.pathname === '/appointment' ? 'active' : ''}>Appointment</Link></li>
+            {currentUser && (
+              <li><Link to="/messages" className={location.pathname === '/messages' ? 'active' : ''}>Messages</Link></li>
+            )}
             <li><Link to="/faq" className={location.pathname === '/faq' ? 'active' : ''}>FAQ</Link></li>
           </ul>
         </div>

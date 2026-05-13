@@ -45,13 +45,16 @@ const ArticleList = () => {
       <div className="container article-list-grid">
         {articles.map((article) => (
           <Link key={article.id} to={`/articles/${article.id}`} className="article-list-card">
-            <div className="article-list-card-top">
+            {article.imageUrl && (
+              <div style={{ width: '100%', height: '200px', backgroundImage: `url(${article.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', borderTopLeftRadius: '0.5rem', borderTopRightRadius: '0.5rem' }}></div>
+            )}
+            <div className="article-list-card-top" style={{ padding: article.imageUrl ? '1.5rem 1.5rem 0' : '0' }}>
               <span className="article-list-author">{article.author}</span>
               <span className="article-list-date">{article.date}</span>
             </div>
-            <h2>{article.title}</h2>
-            <p>{article.excerpt}</p>
-            <div className="article-list-readmore">Read full article →</div>
+            <h2 style={{ padding: article.imageUrl ? '0 1.5rem' : '0' }}>{article.title}</h2>
+            <p style={{ padding: article.imageUrl ? '0 1.5rem' : '0' }}>{article.excerpt}</p>
+            <div className="article-list-readmore" style={{ padding: article.imageUrl ? '0 1.5rem 1.5rem' : '0' }}>Read full article →</div>
           </Link>
         ))}
       </div>

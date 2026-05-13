@@ -60,7 +60,10 @@ const ArticleDetail = () => {
       </div>
 
       <div className="container article-detail-card">
-        <p>{article.content}</p>
+        {article.imageUrl && (
+          <div style={{ width: '100%', height: '400px', backgroundImage: `url(${article.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '0.5rem', marginBottom: '2rem' }}></div>
+        )}
+        <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8' }}>{article.content}</p>
         <Link to="/articles" className="article-list-readmore">← Back to articles</Link>
       </div>
     </div>

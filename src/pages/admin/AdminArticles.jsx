@@ -12,6 +12,7 @@ const AdminArticles = () => {
     date: '',
     excerpt: '',
     content: '',
+    imageUrl: '',
   });
   const [isEditing, setIsEditing] = useState(false);
   const [message, setMessage] = useState('');
@@ -26,13 +27,29 @@ const AdminArticles = () => {
   }, [articles]);
 
   const resetForm = () => {
-    setForm({ id: '', title: '', author: '', date: '', excerpt: '', content: '' });
+    setForm({ id: '', title: '', author: '', date: '', excerpt: '', content: '', imageUrl: '' });
     setIsEditing(false);
     setMessage('');
   };
 
   const handleChange = (key, value) => {
     setForm((current) => ({ ...current, [key]: value }));
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        alert("File is too large. Please select an image under 2MB to avoid crashing local storage.");
+        e.target.value = '';
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        handleChange('imageUrl', reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -100,6 +117,16 @@ const AdminArticles = () => {
             <label>
               Date
               <input type="date" value={form.date} onChange={(e) => handleChange('date', e.target.value)} />
+            </label>
+            <label>
+              Article Cover Image
+              <input type="file" accept="image/*" onChange={handleImageUpload} />
+              {form.imageUrl && (
+                <div style={{ marginTop: '0.5rem' }}>
+                  <img src={form.imageUrl} alt="Preview" style={{ maxHeight: '100px', borderRadius: '4px', border: '1px solid var(--color-border)' }} />
+                  <button type="button" onClick={() => handleChange('imageUrl', '')} style={{ display: 'block', marginTop: '0.25rem', color: 'red', fontSize: '0.8rem' }}>Remove Image</button>
+                </div>
+              )}
             </label>
             <label>
               Summary

@@ -17,6 +17,9 @@ import AdminArticles from './pages/admin/AdminArticles';
 import Login from './pages/public/Login';
 import Register from './pages/public/Register';
 import ListOfBarangay from './pages/public/ListOfBarangay';
+import Appointment from './pages/public/Appointment';
+import Messages from './pages/public/Messages';
+import EquipmentInventory from './pages/admin/EquipmentInventory';
 
 import './App.css';
 
@@ -52,7 +55,9 @@ function App() {
           <Route path="lgu" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Local Government Units</h1></div>} />
           <Route path="organizations" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Organizations</h1></div>} />
           <Route path="barangay-officials" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Barangay Officials</h1></div>} />
-          <Route path="appointment" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Appointment</h1></div>} />
+          <Route path="appointment" element={<Appointment />} />
+          <Route path="messages" element={<Messages />} />
+          <Route path="faq" element={<div className="container" style={{ padding: '4rem 1.5rem' }}><h1>Frequently Asked Questions</h1></div>} />
           <Route path="history" element={<History />} />
           <Route path="articles" element={<ArticleList />} />
           <Route path="articles/:articleId" element={<ArticleDetail />} />
@@ -66,6 +71,7 @@ function App() {
           <Route path="personnel" element={<PersonnelManagement />} />
           <Route path="articles" element={<AdminArticles />} />
           <Route path="documents" element={<AdminDashboard />} />
+          <Route path="equipment" element={<EquipmentInventory />} />
         </Route>
 
         {/* Super Admin Routes */}
@@ -73,6 +79,7 @@ function App() {
           <Route index element={<SuperAdminDashboard />} />
           <Route path="articles" element={<AdminArticles />} />
           <Route path="documents" element={<AdminDashboard />} />
+          <Route path="equipment" element={<EquipmentInventory />} />
         </Route>
       </Routes>
     </Router>

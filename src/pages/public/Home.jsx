@@ -57,6 +57,15 @@ const Home = () => {
     }
   }, [galleryItems.length, currentIndex]);
 
+  useEffect(() => {
+    if (galleryItems.length === 0) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev === galleryItems.length - 1 ? 0 : prev + 1));
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [galleryItems.length]);
+
   const handlePrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? galleryItems.length - 1 : prev - 1));
   };
@@ -151,7 +160,11 @@ const Home = () => {
           <div className="articles-grid">
             {articles.map((article) => (
               <Link key={article.id} to={`/articles/${article.id}`} className="article-card article-link-card">
-                <div className="article-image-placeholder"></div>
+                {article.imageUrl ? (
+                  <div className="article-image-placeholder" style={{ backgroundImage: `url(${article.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+                ) : (
+                  <div className="article-image-placeholder"></div>
+                )}
                 <div className="article-content">
                   <div className="article-meta">
                     <span className="article-author">👤 Author</span>

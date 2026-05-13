@@ -39,6 +39,11 @@ const AdminLayout = ({ role }) => {
               </li>
             )}
             <li>
+              <Link to={role === 'Admin' ? '/admin/equipment' : '/super-admin/equipment'} style={{ color: 'white', textDecoration: 'none' }}>
+                Equipment
+              </Link>
+            </li>
+            <li>
               <Link to="/" style={{ color: 'white', textDecoration: 'none', opacity: 0.8 }}>
                 ← Back to Portal
               </Link>
